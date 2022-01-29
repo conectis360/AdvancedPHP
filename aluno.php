@@ -1,15 +1,13 @@
 <?php
-define('DS', DIRECTORY_SEPARATOR);
-$matricula = isset($_GET['matricula']) ? $_GET['matricula'] : NULL;
-$nome = '';
-if (!is_null($matricula)) {
-    $filename = __DIR__ . DS . 'alunos.txt';
-    $handle = fopen($filename, 'r');
-    while (!feof($handle)) {
-        $record = explode(',', fread($handle, 80));
-        if (!empty($record[0]) && $record[0] == $matricula) {
-            $nome = $record[1];
-        }
-    }
-    fclose($handle);
+require 'pdo.php'; 
+$matricula = (integer) (isset($_GET['matricula']) ? $_GET['matricula']: NULL);
+
+isset($matricula) ? $matricula : null;
+
+if (isset($matricula)) {
+    $result = $pdo->query("Select nome from alunos where matricula=$matricula"); 
+}else {
+    echo 'A matrícula não foi encontrada';
 }
+
+$nome = $result->fetchColumn();
