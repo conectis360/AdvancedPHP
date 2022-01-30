@@ -13,7 +13,7 @@ $entidade = call_user_func([$entidade, 'get'], $chave);
 </head>
 
 <body>
-	<form method="post" action="gravar.php">
+	<form method="post" action="Controlador/index.php?metodo=gravar&cadastro=<?=$_GET['cadastro']?>">
 		Nome <input type="text" name="nome" value="<?= $entidade->getNome() ?>" autofocus="autofocus">
 		<input type="hidden" name="chave" value="<?= $chave ?>">
 		<input type="hidden" name="cadastro" value="<?= $_GET['cadastro'] ?>">

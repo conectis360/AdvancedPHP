@@ -44,10 +44,10 @@ abstract class EntidadeAbstrata
 
     public static function listar()
     {
-        $resultSet = self::getPDO()->query('SELECT * FROM ' . static::$tabela);
+        $resultSet = self::getPdo()->query('SELECT * FROM ' . static::$tabela);
 
         $records = $resultSet->fetchAll();
-
+        
         $html = '';
 
         $chave = static::getChave();
@@ -56,16 +56,18 @@ abstract class EntidadeAbstrata
 
         foreach ($records as $record) {
             $html .= <<<BLOCO
-            <tr>
-            <td>
-            <a href="form.php?cadastro=$cadastro&chave={$record[$chave]}">{$record[$chave]}</a>
-            </td>
-            <td>{$record['nome']}</td>
-            <td>
-            <a href="apagar.php?cadastro=$cadastro&chave={$record[$chave]}">Excluir</a>
-            </td>
-            </tr>
-            BLOCO;
+                <tr>
+                <td>
+                <a href="form.php?cadastro=$cadastro&chave={$record[$chave]}">{$record[$chave]}</a>
+                </td>
+                <td>{$record['nome']}</td>
+                <td>
+                <a href="Controlador\index.php?metodo=apagar&cadastro
+                =$cadastro&chave={$record[$chave]}">
+                Excluir</a>
+                </td>
+                </tr>
+                BLOCO;
         }
         return $html;
     }
