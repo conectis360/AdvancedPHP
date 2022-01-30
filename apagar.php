@@ -1,8 +1,12 @@
 <?php
 require 'pdo.php';
+require 'functions.php';
 
-$matricula = (integer) (isset($_GET['matricula'])) ? $_GET ['matricuça'] : NULL;
+$cadastro = isset($_POST['cadastro']) ? $_POST['cadastro'] : NULL;
+$nomeChave = getChave($cadastro);
 
-$pdo->exec("DELETE FROM alunos WHERE matricula=$matricula");
+$chave = (integer) (isset($_GET['chave']) ? $_GET['chave'] : NULL);
 
-header('Location: index.php');
+$pdo->exec("DELETE FROM $cadastro WHERE $nomeChave=$chave");
+
+header('Location: $cadastro.php');

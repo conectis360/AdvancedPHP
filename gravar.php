@@ -1,14 +1,25 @@
 <?php
 require 'pdo.php';
+require 'functions.php';
+
+$cadastro = isset($_POST['cadastro']) ? $_POST['cadastro'] : NULL;
+
+if (is_null($cadastro)){
+    echo 'Cadastro não informado';
+    exit();
+}
+
+$nomeChave = getChave($cadastro);
 
 $nome = isset($_POST['nome']) ? $_POST['nome'] : NULL;
-$matricula = (integer) (isset($_POST['matricula']) ? $_POST['matricula'] : NULL);
+$chave = (isset($_POST['chave']) ? $_POST['chave'] : NULL);
 
 if (! is_null($nome)) {
     $sql = "INSERT INTO alunos(nome) values ('$nome')";
-    if(!empty($matricula)){
-        $sql = "UPDATE alunos SET nome='$nome'
-        WHERE matricula=$matricula";
+
+    if(!empty($chave)){
+        $sql = "UPDATE $cadastro SET nome='$nome'
+        WHERE $nomeChave=$chave";
     }
 
     if (! $pdo->exec($sql)) {
@@ -16,4 +27,4 @@ if (! is_null($nome)) {
         exit();
     }
 }
-header('Location:index,php');
+header('Location:$cadastro.php');
