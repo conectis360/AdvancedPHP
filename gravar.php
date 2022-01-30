@@ -1,30 +1,8 @@
 <?php
-require 'pdo.php';
 require 'functions.php';
 
-$cadastro = isset($_POST['cadastro']) ? $_POST['cadastro'] : NULL;
+call_user_func([getEntidade(),'gravar'],$_POST);
 
-if (is_null($cadastro)){
-    echo 'Cadastro não informado';
-    exit();
-}
+$cadastro = getCadastro();
 
-$nomeChave = getChave($cadastro);
-
-$nome = isset($_POST['nome']) ? $_POST['nome'] : NULL;
-$chave = (isset($_POST['chave']) ? $_POST['chave'] : NULL);
-
-if (! is_null($nome)) {
-    $sql = "INSERT INTO alunos(nome) values ('$nome')";
-
-    if(!empty($chave)){
-        $sql = "UPDATE $cadastro SET nome='$nome'
-        WHERE $nomeChave=$chave";
-    }
-
-    if (! $pdo->exec($sql)) {
-        echo 'Não consegiu gravar o registro';
-        exit();
-    }
-}
-header('Location:$cadastro.php');
+header("Location:$cadastro.php");

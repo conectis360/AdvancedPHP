@@ -1,3 +1,9 @@
+<?php
+require 'functions.php';
+
+use Entidade\Aluno;
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -18,8 +24,7 @@
         </thead>
         <tbody>
             <?php
-            $cadastro = 'alunos';
-            require 'listar.php';
+            echo Aluno::listar();
             ?>
         </tbody>
     </table>

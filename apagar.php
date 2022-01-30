@@ -1,12 +1,10 @@
 <?php
-require 'pdo.php';
 require 'functions.php';
 
-$cadastro = isset($_POST['cadastro']) ? $_POST['cadastro'] : NULL;
-$nomeChave = getChave($cadastro);
+$class = getEntidade();
 
-$chave = (integer) (isset($_GET['chave']) ? $_GET['chave'] : NULL);
+call_user_func([$class, 'apagar'], $_GET['chave']);
 
-$pdo->exec("DELETE FROM $cadastro WHERE $nomeChave=$chave");
+$cadastro = getCadastro();
 
-header('Location: $cadastro.php');
+header("Location: $cadastro.php");

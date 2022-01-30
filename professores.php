@@ -1,3 +1,8 @@
+<?php
+require 'functions.php';
+
+use Entidade\Professor;
+?>
 <!DOCTYPE html>
 <html>
 
@@ -18,8 +23,7 @@
         </thead>
         <tbody>
             <?php
-            $cadastro = 'professores';
-            require 'listar.php'
+            echo Professor::listar();
             ?>
         </tbody>
     </table>
